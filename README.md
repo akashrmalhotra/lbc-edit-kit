@@ -27,6 +27,7 @@ Frames from real Left Brain Coder reels edited with this kit.
   </tr>
 </table>
 
+
 **Full-screen motion graphics**
 
 <table>
