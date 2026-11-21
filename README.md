@@ -5,6 +5,44 @@ Left Brain Coder) at **Otoma8**, for **Codex and Claude Code**, built on HyperFr
 Bring your own footage. Cut dead air, review mistakes, plan the story, and build
 motion graphics with HyperFrames and GSAP.
 
+## What you can make
+
+Frames from real Left Brain Coder reels edited with this kit.
+
+**Talking head with motion graphics**
+
+<table>
+  <tr>
+    <td align="center" width="33%"><img src="docs/images/showcase/split-reel.jpg" alt="Split reel: glass code card and tool menu above a framed talking head"></td>
+    <td align="center" width="33%"><img src="docs/images/showcase/explainer-diagrams.jpg" alt="Animated RAG comparison diagram above the speaker with a keyword caption"></td>
+    <td align="center" width="33%"><img src="docs/images/showcase/code-cards.jpg" alt="Hook title with stickers above a framed talking head"></td>
+  </tr>
+  <tr>
+    <td align="center"><sub><b>Split reel template</b><br>Glass cards over the camera</sub></td>
+    <td align="center"><sub><b>Explainer diagrams</b><br>Transcript-synced beats</sub></td>
+    <td align="center"><sub><b>Hooks and code cards</b><br>Stickers, titles, callouts</sub></td>
+  </tr>
+</table>
+
+**Full-screen motion graphics**
+
+<table>
+  <tr>
+    <td align="center" width="33%"><img src="docs/images/showcase/mg-timeline.jpg" alt="Full-screen animated timeline of notification cards from 7:00 AM to delivery"></td>
+    <td align="center" width="33%"><img src="docs/images/showcase/mg-geofence-map.jpg" alt="Full-screen map showing a delivery zone polygon cut by a railway line"></td>
+    <td align="center" width="33%"><img src="docs/images/showcase/mg-data-chart.jpg" alt="Full-screen bar chart showing forecast and safety stock"></td>
+  </tr>
+  <tr>
+    <td align="center"><sub><b>Story timelines</b><br>UI cards that build step by step</sub></td>
+    <td align="center"><sub><b>Maps and diagrams</b><br>System design, visualised</sub></td>
+    <td align="center"><sub><b>Data charts</b><br>Animated bars and callouts</sub></td>
+  </tr>
+</table>
+
+**51 face-tracked effects** that can sit behind the speaker's head ([`effects` skill](.claude/skills/effects/)):
+
+<p align="center"><img src=".claude/skills/effects/assets/preview.jpg" width="720" alt="Grid of all 51 effects applied to the same talking-head clip"></p>
+
 ## What's included
 
 - **[Editing playbook](docs/EDITING-PLAYBOOK.md):** how Left Brain Coder videos get edited with AI, the measured house reel style, the B-roll, caption, and sound rules, and how every note becomes a rule in a skill.
@@ -38,7 +76,7 @@ Install Node.js **22 or newer**, Git, FFmpeg (including ffprobe), and Chrome or
 Chromium. Make `node`, `ffmpeg`, and `ffprobe` available in your terminal. Then run:
 
 ```sh
-git clone https://github.com/akashmalhotra1/lbc-edit-kit.git
+git clone https://github.com/akashrmalhotra/lbc-edit-kit.git
 cd lbc-edit-kit
 npm ci
 npm run setup
