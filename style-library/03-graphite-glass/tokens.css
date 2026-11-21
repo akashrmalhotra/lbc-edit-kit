@@ -1,0 +1,74 @@
+/* Graphite Glass: tokens for every card in this style.
+   Apple-like dark smoked glass over live footage. Cards reference these
+   variables only; never hardcode a color, font, radius, or easing in a card. */
+
+:root {
+  /* palette */
+  --glass: rgba(28, 28, 30, 0.58);        /* card surface over footage */
+  --glass-strong: rgba(28, 28, 30, 0.72); /* use on very bright or busy footage */
+  --edge: rgba(255, 255, 255, 0.14);      /* 1.5px hairline border */
+  --hi: rgba(255, 255, 255, 0.10);        /* inner top highlight */
+  --shadow: rgba(0, 0, 0, 0.30);
+  --fg: #F5F5F7;                          /* primary text */
+  --muted: rgba(235, 235, 245, 0.60);     /* labels, inactive rows */
+  --faint: rgba(255, 255, 255, 0.16);     /* tracks, wires, empty rings */
+  --well: rgba(0, 0, 0, 0.30);            /* inset areas: code, JSON, pills */
+  --accent: #0A84FF;                      /* Apple system blue (dark): the active thing */
+  --accent-key: #4DA3FF;                  /* accent for text on glass (higher contrast) */
+  --on-accent: #FFFFFF;
+  --glow: rgba(10, 132, 255, 0.40);
+  --ok: #30D158;                          /* done, saved, success */
+  --bad: #FF453A;                         /* error, wrong, recording */
+  --cap-bg: rgba(28, 28, 30, 0.62);
+
+  /* typography: SF Pro renders on macOS; Inter is the portable fallback */
+  --font-display: -apple-system, "SF Pro Display", "Inter", "Helvetica Neue", sans-serif;
+  --font-body: -apple-system, "SF Pro Text", "Inter", "Helvetica Neue", sans-serif;
+  --font-mono: "SF Mono", "JetBrains Mono", Menlo, monospace;
+  --track-tight: -0.02em;
+
+  --size-caption: 56px;   /* caption pill */
+  --size-title: 40px;     /* card titles */
+  --size-row: 27px;       /* list rows, chips */
+  --size-body: 24px;
+  --size-label: 21px;     /* card header labels, never below 18px */
+
+  /* shape */
+  --r-card: 36px;
+  --r-inner: 18px;
+  --r-pill: 999px;
+  --blur: 30px;
+  --safe-x: 60px;         /* Instagram inset from the sides */
+  --safe-top: 160px;      /* clears the Reels top UI */
+  --cap-top: 1390px;      /* caption pill sits on the chest */
+
+  /* motion (GSAP equivalents in DESIGN.md) */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);   /* expo.out: entrances */
+  --ease-move: cubic-bezier(0.65, 0, 0.35, 1); /* power2.inOut: moves, morphs */
+  --ease-in: cubic-bezier(0.32, 0, 0.67, 0);   /* power2.in: the rare exit */
+  --dur-in: 0.6s;
+  --dur-morph: 0.5s;
+  --dur-out: 0.35s;
+}
+
+/* Frost mode: for DARK footage. Same layout, motion, and type; only the surface
+   flips to white frosted glass. Set data-mode="frost" on the root composition
+   (pick it with scripts/pick-mode.mjs). Graphite (above) is for LIGHT footage. */
+[data-mode="frost"] {
+  --glass: rgba(255, 255, 255, 0.66);
+  --glass-strong: rgba(255, 255, 255, 0.78);
+  --edge: rgba(255, 255, 255, 0.70);
+  --hi: rgba(255, 255, 255, 0.80);
+  --shadow: rgba(0, 0, 0, 0.16);
+  --fg: #1D1D1F;
+  --muted: rgba(60, 60, 67, 0.62);
+  --faint: rgba(60, 60, 67, 0.16);
+  --well: rgba(118, 118, 128, 0.12);
+  --accent: #0071E3;                      /* apple.com blue */
+  --accent-key: #0071E3;
+  --on-accent: #FFFFFF;
+  --glow: rgba(0, 113, 227, 0.30);
+  --ok: #34C759;
+  --bad: #FF3B30;
+  --cap-bg: rgba(255, 255, 255, 0.72);
+}

@@ -1,0 +1,86 @@
+<!doctype html>
+<!--
+  Graphite Glass · tier2 · list.rail
+  A persistent index panel (top-right). One shared accent highlight glides from row
+  to row; finished rows get a green tick. Transparent outside the panel.
+  Slots: title (text), items (list, 3-7 items, max 14 chars each).
+  Timing: data-step-times on the root = seconds at which each item becomes active.
+  Mode: set data-mode="frost" on the root for dark footage.
+-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../tokens.css" />
+    <style>
+      html, body { margin: 0; background: transparent; }
+      #t2-list-rail { position: absolute; inset: 0; width: 1080px; height: 1920px; background: transparent; font-family: var(--font-body); color: var(--fg); -webkit-font-smoothing: antialiased; }
+      #t2-list-rail .panel {
+        position: absolute; right: var(--safe-x); top: calc(var(--safe-top) + 10px); width: 268px;
+        padding: 22px 14px 14px; border-radius: var(--r-card);
+        background: var(--glass); border: 1.5px solid var(--edge);
+        backdrop-filter: blur(var(--blur)) saturate(180%); -webkit-backdrop-filter: blur(var(--blur)) saturate(180%);
+        box-shadow: 0 30px 70px var(--shadow), inset 0 1px 0 var(--hi);
+        transform: scale(0.9); transform-origin: 100% 0;
+      }
+      #t2-list-rail .title { font-size: 18px; font-weight: 600; color: var(--muted); padding: 0 12px 12px; white-space: nowrap; }
+      #t2-list-rail .rows { position: relative; }
+      #t2-list-rail .hl { position: absolute; left: 0; right: 0; top: 0; height: 60px; border-radius: 16px; background: var(--accent); box-shadow: 0 10px 28px var(--glow); }
+      #t2-list-rail .row { position: relative; display: flex; align-items: center; gap: 12px; height: 60px; padding: 0 14px; font-size: var(--size-row); font-weight: 600; letter-spacing: -0.01em; color: var(--muted); }
+      #t2-list-rail .n { width: 28px; font-size: 17px; font-variant-numeric: tabular-nums; }
+      #t2-list-rail .tick { position: absolute; left: 14px; width: 28px; height: 28px; border-radius: 50%; background: var(--ok); color: #fff; font-size: 16px; font-weight: 800; display: flex; align-items: center; justify-content: center; opacity: 0; }
+    </style>
+  </head>
+  <body>
+    <div id="t2-list-rail" data-composition-id="t2-list-rail" data-start="0" data-duration="12" data-width="1080" data-height="1920" data-step-times="1,3,5,7,9,11">
+      <div class="panel">
+        <div class="title" data-slot="title">All the Lang tools</div>
+        <div class="rows" data-slot="items">
+          <div class="hl"></div>
+          <div class="row"><span class="n">01</span><span class="tick">✓</span><span class="name">LangChain</span></div>
+          <div class="row"><span class="n">02</span><span class="tick">✓</span><span class="name">LangGraph</span></div>
+          <div class="row"><span class="n">03</span><span class="tick">✓</span><span class="name">LangSmith</span></div>
+          <div class="row"><span class="n">04</span><span class="tick">✓</span><span class="name">LangFuse</span></div>
+          <div class="row"><span class="n">05</span><span class="tick">✓</span><span class="name">LangFlow</span></div>
+          <div class="row"><span class="n">06</span><span class="tick">✓</span><span class="name">LangExtract</span></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      window.__timelines = window.__timelines || {};
+      (function () {
+        const root = document.getElementById("t2-list-rail");
+        const steps = root.dataset.stepTimes.split(",").map(Number);
+        const rows = root.querySelectorAll(".row");
+        const ROW = 60;
+        const cs = getComputedStyle(root);
+        const tok = (n) => cs.getPropertyValue(n).trim();
+        const ON = tok("--on-accent"), FG = tok("--fg");
+        const tl = gsap.timeline({ paused: true });
+
+        // entrance: panel settles in, rows stagger up
+        tl.from(root.querySelector(".panel"), { autoAlpha: 0, y: 16, scale: 0.88, filter: "blur(8px)", duration: 0.6, ease: "expo.out" }, 0.1);
+        tl.from(rows, { autoAlpha: 0, y: 10, duration: 0.45, ease: "power3.out", stagger: 0.06 }, 0.25);
+        tl.set(root.querySelector(".hl"), { autoAlpha: 0, y: 0 }, 0);
+
+        steps.forEach((t, i) => {
+          const row = rows[i];
+          if (!row) return;
+          // highlight glides to the active row
+          if (i === 0) tl.to(root.querySelector(".hl"), { autoAlpha: 1, duration: 0.35, ease: "power2.out" }, t);
+          else tl.to(root.querySelector(".hl"), { y: i * ROW, duration: 0.45, ease: "power2.inOut" }, t);
+          tl.to(row, { color: ON, duration: 0.3, ease: "power2.out" }, t);
+          // the previous row becomes done: text to full ink, number swaps for a tick
+          if (i > 0) {
+            const prev = rows[i - 1];
+            tl.to(prev, { color: FG, duration: 0.3, ease: "power2.out" }, t);
+            tl.to(prev.querySelector(".n"), { autoAlpha: 0, duration: 0.15 }, t);
+            tl.fromTo(prev.querySelector(".tick"), { autoAlpha: 0, scale: 0.4 }, { autoAlpha: 1, scale: 1, duration: 0.4, ease: "back.out(1.4)" }, t + 0.05);
+          }
+        });
+        window.__timelines["t2-list-rail"] = tl;
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,56 @@
+<!doctype html>
+<!--
+  Graphite Glass · tier2 · definition.card
+  The top-left glass card: a numbered label, a pill tag, and a body slot that holds
+  either a short title or a small animated visual (code line, nodes, bars, flow).
+  Keep meaningful content in the top 220px so it stays above the speaker's hair.
+  Slots: label (text, max 24), tag (text, max 16), body (html: a visual or a title, max 60 chars as text).
+  Mode: set data-mode="frost" on the root for dark footage.
+-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../tokens.css" />
+    <style>
+      html, body { margin: 0; background: transparent; }
+      #t2-definition-card { position: absolute; inset: 0; width: 1080px; height: 1920px; background: transparent; font-family: var(--font-body); color: var(--fg); -webkit-font-smoothing: antialiased; }
+      #t2-definition-card .card {
+        position: absolute; left: var(--safe-x); top: var(--safe-top); width: 690px; height: 262px;
+        box-sizing: border-box; padding: 24px 32px; overflow: hidden; border-radius: var(--r-card);
+        background: var(--glass); border: 1.5px solid var(--edge);
+        backdrop-filter: blur(var(--blur)) saturate(180%); -webkit-backdrop-filter: blur(var(--blur)) saturate(180%);
+        box-shadow: 0 30px 70px var(--shadow), inset 0 1px 0 var(--hi);
+        transform: scale(0.86); transform-origin: 0 0;
+      }
+      #t2-definition-card .head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; font-size: var(--size-label); font-weight: 600; color: var(--muted); }
+      #t2-definition-card .tag { font-size: 19px; padding: 6px 14px; border-radius: var(--r-pill); background: var(--well); color: var(--fg); }
+      #t2-definition-card .code { font-family: var(--font-mono); font-size: 29px; background: var(--well); border-radius: var(--r-inner); padding: 22px 24px; }
+      #t2-definition-card .code .k { color: var(--accent-key); font-weight: 600; }
+      #t2-definition-card .chip { display: inline-flex; margin-top: 16px; padding: 13px 24px; border-radius: var(--r-pill); background: var(--accent); color: var(--on-accent); font-size: 29px; font-weight: 600; box-shadow: 0 10px 28px var(--glow); }
+    </style>
+  </head>
+  <body>
+    <div id="t2-definition-card" data-composition-id="t2-definition-card" data-start="0" data-duration="4" data-width="1080" data-height="1920">
+      <div class="card">
+        <div class="head"><span data-slot="label">01 · LangChain</span><span class="tag" data-slot="tag">Build</span></div>
+        <div class="body" data-slot="body">
+          <div class="code"><span class="k">create_agent</span>(model, tools)</div>
+          <div class="chip">AI agent</div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      window.__timelines = window.__timelines || {};
+      (function () {
+        const q = (s) => document.querySelectorAll("#t2-definition-card " + s);
+        const tl = gsap.timeline({ paused: true });
+        tl.from(q(".card"), { autoAlpha: 0, y: 16, scale: 0.84, filter: "blur(8px)", duration: 0.6, ease: "expo.out" }, 0.1);
+        tl.from(q(".head > *"), { autoAlpha: 0, y: 8, duration: 0.4, ease: "power3.out", stagger: 0.07 }, 0.3);
+        tl.from(q(".body > *"), { autoAlpha: 0, y: 12, filter: "blur(6px)", duration: 0.5, ease: "power2.out", stagger: 0.08 }, 0.42);
+        window.__timelines["t2-definition-card"] = tl;
+      })();
+    </script>
+  </body>
+</html>

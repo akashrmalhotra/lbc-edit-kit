@@ -1,0 +1,133 @@
+{
+  "$schema": "../registry.schema.json",
+  "id": "graphite-glass",
+  "name": "Graphite Glass",
+  "number": "03",
+  "status": "approved",
+  "inspiration": "Apple-like smoked glass (macOS dark mode, visionOS) over live vertical talking-head footage. Approved from still mockups on the all-lang-tools reel, 2026-11-19.",
+  "summary": "Clean, minimal, premium vertical-reel overlays: a top-left glass card, a top-right progress index, and sentence-case glass caption pills. Two modes: Graphite (dark glass) for light footage, Frost (white glass) for dark footage.",
+  "format": {
+    "width": 1080,
+    "height": 1920,
+    "notes": "Vertical-first. Footage stays full-frame; graphics inset 60px from the sides and at least 160px from the top."
+  },
+  "modes": {
+    "graphite": {
+      "use": "light or bright footage",
+      "default": true
+    },
+    "frost": {
+      "use": "dark footage",
+      "attribute": "data-mode=\"frost\""
+    },
+    "picker": "scripts/pick-mode.mjs",
+    "layouts": {
+      "split": {
+        "default": true,
+        "use": "leftbraincoder standard: white drifting-light canvas, graphics top, speaker card bottom",
+        "template": "style-templates/leftbraincoder-split"
+      },
+      "full-frame": {
+        "use": "footage full-frame with overlays (original all-lang-tools)"
+      }
+    }
+  },
+  "palette": {
+    "bg": "rgba(28,28,30,.58)",
+    "fg": "#F5F5F7",
+    "accent": "#0A84FF",
+    "ok": "#30D158",
+    "bad": "#FF453A",
+    "notes": "Graphite values shown; Frost overrides live in tokens.css under [data-mode=frost]. One accent only: blue = active, green = done, red = wrong."
+  },
+  "fonts": {
+    "display": "SF Pro Display (fallback Inter)",
+    "body": "SF Pro Text (fallback Inter)",
+    "mono": "SF Mono",
+    "notes": "Weights 600-700, sentence case, -0.02em tracking on titles and captions."
+  },
+  "motion": "Calm and physical. Entrances blur-in + rise 16px + scale .98 over 0.6s expo.out; moves and morphs power2.inOut 0.45-0.5s; the tick is the only overshoot (back.out 1.4). Slow camera push 1.00-1.06 per section. Split layout: continuous 3D float on every panel, a -7deg Y turn plus a sheen on every item change, staggered blur-in children, and depth entrances and exits.",
+  "transitions": "Card content cross-fades and blurs inside a panel that stays put. No hard cuts, whips, flashes, or bounces.",
+  "cards": [
+    {
+      "id": "graphite-glass.t2.list.rail",
+      "tier": "tier2",
+      "purpose": "list",
+      "file": "cards/tier2/t2-list-rail.html",
+      "slots": [
+        {
+          "name": "title",
+          "type": "text",
+          "maxChars": 22
+        },
+        {
+          "name": "items",
+          "type": "list",
+          "maxItems": 7,
+          "maxChars": 14
+        }
+      ],
+      "duration": {
+        "min": 10,
+        "max": 90
+      },
+      "preview": {
+        "mp4": "preview/graphite-glass.t2.list.rail.mp4",
+        "poster": "preview/graphite-glass.t2.list.rail.png"
+      }
+    },
+    {
+      "id": "graphite-glass.t2.definition.card",
+      "tier": "tier2",
+      "purpose": "definition",
+      "file": "cards/tier2/t2-definition-card.html",
+      "slots": [
+        {
+          "name": "label",
+          "type": "text",
+          "maxChars": 24
+        },
+        {
+          "name": "tag",
+          "type": "text",
+          "maxChars": 16
+        },
+        {
+          "name": "body",
+          "type": "richtext",
+          "maxChars": 60
+        }
+      ],
+      "duration": {
+        "min": 2,
+        "max": 8
+      },
+      "preview": {
+        "mp4": "preview/graphite-glass.t2.definition.card.mp4",
+        "poster": "preview/graphite-glass.t2.definition.card.png"
+      }
+    },
+    {
+      "id": "graphite-glass.custom.caption.pill",
+      "tier": "custom",
+      "purpose": "caption",
+      "file": "cards/custom/caption-pill.html",
+      "slots": [
+        {
+          "name": "phrases",
+          "type": "list",
+          "maxItems": 200,
+          "maxChars": 26
+        }
+      ],
+      "duration": {
+        "min": 1,
+        "max": 180
+      },
+      "preview": {
+        "mp4": "preview/graphite-glass.custom.caption.pill.mp4",
+        "poster": "preview/graphite-glass.custom.caption.pill.png"
+      }
+    }
+  ]
+}

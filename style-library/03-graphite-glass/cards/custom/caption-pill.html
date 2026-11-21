@@ -1,0 +1,55 @@
+<!doctype html>
+<!--
+  Graphite Glass · custom · caption.pill
+  Sentence-case caption in a glass pill on the speaker's chest. One phrase (1-3 words)
+  at a time; phrases hard-swap 2 frames before their first word (no pop animation).
+  Wrap the key word in <em>; add class bad (wrong) or ok (done). Inside data-phrases, write attribute quotes as &apos; (never backslash-escaped double quotes).
+  Slots: phrases (list of {t, text} pairs, set in data-phrases as JSON).
+  Mode: set data-mode="frost" on the root for dark footage.
+-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../tokens.css" />
+    <style>
+      html, body { margin: 0; background: transparent; }
+      #caption-pill { position: absolute; inset: 0; width: 1080px; height: 1920px; background: transparent; font-family: var(--font-display); -webkit-font-smoothing: antialiased; }
+      #caption-pill .cap {
+        position: absolute; left: 50%; top: var(--cap-top); transform: translateX(-50%);
+        padding: 16px 32px; border-radius: var(--r-pill); white-space: nowrap; opacity: 0;
+        background: var(--cap-bg); color: var(--fg); border: 1.5px solid var(--edge);
+        backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%);
+        box-shadow: 0 18px 40px var(--shadow);
+        font-size: var(--size-caption); font-weight: 700; letter-spacing: var(--track-tight);
+      }
+      #caption-pill .cap em { font-style: normal; color: var(--accent-key); }
+      #caption-pill .cap em.bad { color: var(--bad); }
+      #caption-pill .cap em.ok { color: var(--ok); }
+    </style>
+  </head>
+  <body>
+    <div id="caption-pill" data-composition-id="caption-pill" data-start="0" data-duration="4" data-width="1080" data-height="1920"
+      data-phrases='[{"t":0.2,"text":"With just a <em>few lines</em>"},{"t":1.6,"text":"Where it went <em class=&apos;bad&apos;>wrong</em>"},{"t":3.0,"text":"It is <em class=&apos;ok&apos;>open source</em>"}]'>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      window.__timelines = window.__timelines || {};
+      (function () {
+        const root = document.getElementById("caption-pill");
+        const phrases = JSON.parse(root.dataset.phrases);
+        const end = Number(root.dataset.duration);
+        const LEAD = 2 / 30; // appear 2 frames before the word
+        const tl = gsap.timeline({ paused: true });
+        phrases.forEach((p, i) => {
+          const el = document.createElement("div");
+          el.className = "cap"; el.innerHTML = p.text; root.appendChild(el);
+          const on = Math.max(0, p.t - LEAD);
+          const off = i + 1 < phrases.length ? Math.max(0, phrases[i + 1].t - LEAD) : end;
+          tl.set(el, { opacity: 1 }, on).set(el, { opacity: 0 }, off);
+        });
+        window.__timelines["caption-pill"] = tl;
+      })();
+    </script>
+  </body>
+</html>
