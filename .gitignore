@@ -35,6 +35,9 @@ Thumbs.db
 .codex/sessions/
 .codex/history.jsonl
 
+# README walkthrough video (deliberately public).
+!docs/media/kit-explainer.mp4
+
 # Deliberately public synthetic timing data, without media.
 !examples/short-form/assets/
 !examples/short-form/assets/*.json

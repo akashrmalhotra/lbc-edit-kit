@@ -5,6 +5,9 @@ Left Brain Coder) at **Otoma8**, for **Codex and Claude Code**, built on HyperFr
 Bring your own footage. Cut dead air, review mistakes, plan the story, and build
 motion graphics with HyperFrames and GSAP.
 
+<p align="center"><a href="docs/media/kit-explainer.mp4"><img src="docs/images/kit-explainer-poster.jpg" width="820" alt="Watch the 75-second walkthrough of LBC Edit Kit"></a></p>
+<p align="center"><sub>75-second walkthrough, made with this kit. Click to play.</sub></p>
+
 ## What you can make
 
 Frames from real Left Brain Coder reels edited with this kit.
